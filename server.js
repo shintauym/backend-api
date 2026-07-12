@@ -1,6 +1,9 @@
 require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
+const cors = require
+("cors");
+const db = require("./config/db");
+const seedDatabase = require("./database/seed");
 
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productsRoutes");
@@ -32,6 +35,9 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+
+seedDatabase(db).then(() => {
+  app.listen(PORT, () => {
     console.log(`Server berjalan di port ${PORT}`);
+  });
 });
