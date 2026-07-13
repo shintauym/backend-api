@@ -4,9 +4,6 @@
 --  pesanan, wishlist, alamat, ulasan, profil)
 -- ============================================================
 
-CREATE DATABASE IF NOT EXISTS shinta_ilkom;
-USE shinta_ilkom;
-
 -- ── USERS ──────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,

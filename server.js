@@ -36,8 +36,12 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-seedDatabase(db).then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server berjalan di port ${PORT}`);
+seedDatabase(db)
+  .catch((err) => {
+    console.error("Seed database gagal:", err.message);
+  })
+  .finally(() => {
+    app.listen(PORT, () => {
+      console.log(`Server berjalan di port ${PORT}`);
+    });
   });
-});
