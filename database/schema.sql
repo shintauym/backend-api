@@ -111,6 +111,18 @@ CREATE TABLE IF NOT EXISTS wishlist (
   FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
 
+-- ── NOTIFICATIONS ─────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS notifications (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  judul VARCHAR(100) NOT NULL,
+  pesan TEXT NOT NULL,
+  tipe ENUM('pesanan', 'promo', 'sistem') DEFAULT 'sistem',
+  is_read TINYINT(1) DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
 -- ── REVIEWS (ulasan) ────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS reviews (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -148,3 +160,9 @@ INSERT INTO products (category_id, nama_produk, deskripsi, harga, rating, emoji,
   (3, 'Lemon Zest',      'Donat lemon segar dengan taburan zest lemon dan gula halus.', 9500,  4.6, '🍋', 30),
   (5, 'Matcha Glaze',    'Donat matcha premium dengan lapisan white chocolate.', 11000, 4.8, '🍵', 25),
   (4, 'Birthday Box',    'Box set 6 donat spesial cocok untuk hadiah ulang tahun.', 55000, 5.0, '📦', 15);
+
+-- Notifikasi contoh untuk user_id = 1 (akan muncul setelah user pertama daftar)
+INSERT INTO notifications (user_id, judul, pesan, tipe, is_read) VALUES
+  (1, 'Selamat Datang di DonatKu! 🎉', 'Terima kasih telah bergabung. Nikmati berbagai donat lezat kami!', 'sistem', 0),
+  (1, 'Promo Spesial! 🎉', 'Diskon 20% untuk semua donat Matcha! Berlaku hingga akhir bulan.', 'promo', 0),
+  (1, 'Pesanan Dikirim! 📦', 'Pesanan #1 Anda sedang dalam perjalanan. Estimasi tiba 1-2 hari.', 'pesanan', 0);
