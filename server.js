@@ -14,6 +14,7 @@ const orderRoutes = require("./routes/orderRoutes");
 const wishlistRoutes = require("./routes/wishlistRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const adminOrderRoutes = require("./routes/adminOrderRoutes");
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/admin/orders", adminOrderRoutes);
 
 app.get("/", (req, res) => {
   res.send("Backend Shinta Ilkom Aktif");
